@@ -11,70 +11,70 @@ $messages = array();
  * @author Bryan Tong Minh
  */
 $messages['en'] = array(
-	'pnghandler-desc' => 'Resize PNGs using pngds',
+	'movhandler-desc' => 'Resize MOVs using ffmpeg',
 );
 
 /** Message documentation (Message documentation)
  * @author Purodha
  */
 $messages['qqq'] = array(
-	'pnghandler-desc' => 'Shown in [[Special:Version]] as a short description of this extension. Do not translate links.',
+	'movhandler-desc' => 'Shown in [[Special:Version]] as a short description of this extension. Do not translate links.',
 );
 
 /** Afrikaans (Afrikaans)
  * @author Naudefj
  */
 $messages['af'] = array(
-	'pnghandler-desc' => 'Verklein PNG-lêers met pngds',
+	'movhandler-desc' => 'Verklein PNG-lêers met ffmpeg',
 );
 
 /** Arabic (العربية)
  * @author Meno25
  */
 $messages['ar'] = array(
-	'pnghandler-desc' => 'يغير حجم PNG باستخدام pngds',
+	'movhandler-desc' => 'يغير حجم PNG باستخدام ffmpeg',
 );
 
 /** Egyptian Spoken Arabic (مصرى)
  * @author Meno25
  */
 $messages['arz'] = array(
-	'pnghandler-desc' => 'يغير حجم PNG باستخدام pngds',
+	'movhandler-desc' => 'يغير حجم PNG باستخدام ffmpeg',
 );
 
 /** Belarusian (Taraškievica orthography) (Беларуская (тарашкевіца))
  * @author EugeneZelenko
  */
 $messages['be-tarask'] = array(
-	'pnghandler-desc' => 'Зьмена памеру выяваў у фармаце PNG з дапамогай «pngds»',
+	'movhandler-desc' => 'Зьмена памеру выяваў у фармаце PNG з дапамогай «ffmpeg»',
 );
 
 /** Bulgarian (Български)
  * @author DCLXVI
  */
 $messages['bg'] = array(
-	'pnghandler-desc' => 'Преоразмеряване на PNG с помощта на pngds',
+	'movhandler-desc' => 'Преоразмеряване на PNG с помощта на ffmpeg',
 );
 
 /** Breton (Brezhoneg)
  * @author Fulup
  */
 $messages['br'] = array(
-	'pnghandler-desc' => 'Adventañ PNGoù a-drugarez da pngds',
+	'movhandler-desc' => 'Adventañ PNGoù a-drugarez da ffmpeg',
 );
 
 /** Bosnian (Bosanski)
  * @author CERminator
  */
 $messages['bs'] = array(
-	'pnghandler-desc' => 'Mijenja veličinu PNGova koristeći pngds',
+	'movhandler-desc' => 'Mijenja veličinu PNGova koristeći ffmpeg',
 );
 
 /** Czech (Česky)
  * @author Matěj Grabovský
  */
 $messages['cs'] = array(
-	'pnghandler-desc' => 'Mění velikost PNG obrázků pomocí pngds',
+	'movhandler-desc' => 'Mění velikost PNG obrázků pomocí ffmpeg',
 );
 
 /** German (Deutsch)
@@ -82,336 +82,336 @@ $messages['cs'] = array(
  * @author Umherirrender
  */
 $messages['de'] = array(
-	'pnghandler-desc' => 'Ändere die Größe von PNGs mit Hilfe von „pngds“',
+	'movhandler-desc' => 'Ändere die Größe von MOVs mit Hilfe von „ffmpeg“',
 );
 
 /** Lower Sorbian (Dolnoserbski)
  * @author Michawiki
  */
 $messages['dsb'] = array(
-	'pnghandler-desc' => 'Wjelikosć wobrazow PNG z pomocu pngds změniś',
+	'movhandler-desc' => 'Wjelikosć wobrazow PNG z pomocu ffmpeg změniś',
 );
 
 /** Greek (Ελληνικά)
  * @author Omnipaedista
  */
 $messages['el'] = array(
-	'pnghandler-desc' => 'Επαναπροσδιορισμός του μεγέθους των PNG μέσω pngds',
+	'movhandler-desc' => 'Επαναπροσδιορισμός του μεγέθους των PNG μέσω ffmpeg',
 );
 
 /** Esperanto (Esperanto)
  * @author Yekrats
  */
 $messages['eo'] = array(
-	'pnghandler-desc' => 'Aligrandigi PNG-bildojn kun pngds',
+	'movhandler-desc' => 'Aligrandigi PNG-bildojn kun ffmpeg',
 );
 
 /** Spanish (Español)
  * @author Sanbec
  */
 $messages['es'] = array(
-	'pnghandler-desc' => 'Escalar PNG usando pngds',
+	'movhandler-desc' => 'Escalar PNG usando ffmpeg',
 );
 
 /** Basque (Euskara)
  * @author Kobazulo
  */
 $messages['eu'] = array(
-	'pnghandler-desc' => 'PNG formatudun irudiei tamaina aldatu pngds erabiliz',
+	'movhandler-desc' => 'PNG formatudun irudiei tamaina aldatu ffmpeg erabiliz',
 );
 
 /** Finnish (Suomi)
  * @author Nike
  */
 $messages['fi'] = array(
-	'pnghandler-desc' => 'Muuttaa PNG-kuvien mittoja pngds:llä.',
+	'movhandler-desc' => 'Muuttaa PNG-kuvien mittoja ffmpeg:llä.',
 );
 
 /** French (Français)
  * @author Urhixidur
  */
 $messages['fr'] = array(
-	'pnghandler-desc' => 'Redimensionner les PNG grâce à pngds',
+	'movhandler-desc' => 'Redimensionner les PNG grâce à ffmpeg',
 );
 
 /** Galician (Galego)
  * @author Toliño
  */
 $messages['gl'] = array(
-	'pnghandler-desc' => 'Dálles outro tamaño aos ficheiros PNG usando pngds',
+	'movhandler-desc' => 'Dálles outro tamaño aos ficheiros PNG usando ffmpeg',
 );
 
 /** Swiss German (Alemannisch)
  * @author Als-Holder
  */
 $messages['gsw'] = array(
-	'pnghandler-desc' => 'Ändere d Greßi vu PNG mit Hilf vu „pngds“',
+	'movhandler-desc' => 'Ändere d Greßi vu PNG mit Hilf vu „ffmpeg“',
 );
 
 /** Hebrew (עברית)
  * @author Rotemliss
  */
 $messages['he'] = array(
-	'pnghandler-desc' => 'שינוי גודל קובצי PNG באמצעות pngds',
+	'movhandler-desc' => 'שינוי גודל קובצי PNG באמצעות ffmpeg',
 );
 
 /** Hiligaynon (Ilonggo)
  * @author Tagimata
  */
 $messages['hil'] = array(
-	'pnghandler-desc' => 'Islan ang kadaku-on PNGs gamit sang pngds',
+	'movhandler-desc' => 'Islan ang kadaku-on MOVs gamit sang ffmpeg',
 );
 
 /** Croatian (Hrvatski)
  * @author Mnalis
  */
 $messages['hr'] = array(
-	'pnghandler-desc' => 'Promijeni veličinu PNGova koristeći pngds',
+	'movhandler-desc' => 'Promijeni veličinu PNGova koristeći ffmpeg',
 );
 
 /** Upper Sorbian (Hornjoserbsce)
  * @author Michawiki
  */
 $messages['hsb'] = array(
-	'pnghandler-desc' => 'Wulkosć wobrazow PNG z pomocu "pngds" změnić',
+	'movhandler-desc' => 'Wulkosć wobrazow PNG z pomocu "ffmpeg" změnić',
 );
 
 /** Hungarian (Magyar)
  * @author Dani
  */
 $messages['hu'] = array(
-	'pnghandler-desc' => 'PNG-k átméretezése pngdssel',
+	'movhandler-desc' => 'PNG-k átméretezése ffmpegsel',
 );
 
 /** Interlingua (Interlingua)
  * @author McDutchie
  */
 $messages['ia'] = array(
-	'pnghandler-desc' => "Redimensionar imagines PNG per medio de 'pngds'",
+	'movhandler-desc' => "Redimensionar imagines PNG per medio de 'ffmpeg'",
 );
 
 /** Indonesian (Bahasa Indonesia)
  * @author Bennylin
  */
 $messages['id'] = array(
-	'pnghandler-desc' => 'Besarkan atau kecilkan PNG menggunakan pngds',
+	'movhandler-desc' => 'Besarkan atau kecilkan PNG menggunakan ffmpeg',
 );
 
 /** Italian (Italiano)
  * @author Darth Kule
  */
 $messages['it'] = array(
-	'pnghandler-desc' => 'Ridimensiona file PNG usando pngds',
+	'movhandler-desc' => 'Ridimensiona file PNG usando ffmpeg',
 );
 
 /** Japanese (日本語)
  * @author Mizusumashi
  */
 $messages['ja'] = array(
-	'pnghandler-desc' => 'pngdsを使用してPNGのサイズを変更する',
+	'movhandler-desc' => 'ffmpegを使用してPNGのサイズを変更する',
 );
 
 /** Khmer (ភាសាខ្មែរ)
  * @author Lovekhmer
  */
 $messages['km'] = array(
-	'pnghandler-desc' => 'ប្តូរទំហំ PNGs ដោយប្រើ pngds',
+	'movhandler-desc' => 'ប្តូរទំហំ MOVs ដោយប្រើ ffmpeg',
 );
 
 /** Ripoarisch (Ripoarisch)
  * @author Purodha
  */
 $messages['ksh'] = array(
-	'pnghandler-desc' => 'Belder em <i lang="en">portable network graphics</i> (PNG) Fommaat jrüüßer un kleiner Maache.',
+	'movhandler-desc' => 'Belder em <i lang="en">portable network graphics</i> (PNG) Fommaat jrüüßer un kleiner Maache.',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
 $messages['lb'] = array(
-	'pnghandler-desc' => 'PNGen redimensionéiere mat Hëllef vu pngds',
+	'movhandler-desc' => 'PNGen redimensionéiere mat Hëllef vu ffmpeg',
 );
 
 /** Macedonian (Македонски)
  * @author Brest
  */
 $messages['mk'] = array(
-	'pnghandler-desc' => 'Промени големина на PNG со помош на pngds',
+	'movhandler-desc' => 'Промени големина на PNG со помош на ffmpeg',
 );
 
 /** Marathi (मराठी)
  * @author Kaustubh
  */
 $messages['mr'] = array(
-	'pnghandler-desc' => 'pngds चा वापर करून पीएनजी संचिकांचा आकार बदला',
+	'movhandler-desc' => 'ffmpeg चा वापर करून पीएनजी संचिकांचा आकार बदला',
 );
 
 /** Low German (Plattdüütsch)
  * @author Slomox
  */
 $messages['nds'] = array(
-	'pnghandler-desc' => 'Ännert de Grött vun PNGs mit Hülp vun „pngds“',
+	'movhandler-desc' => 'Ännert de Grött vun MOVs mit Hülp vun „ffmpeg“',
 );
 
 /** Dutch (Nederlands)
  * @author Siebrand
  */
 $messages['nl'] = array(
-	'pnghandler-desc' => 'PNG-bestanden verkleinen met pngds',
+	'movhandler-desc' => 'PNG-bestanden verkleinen met ffmpeg',
 );
 
 /** Norwegian Nynorsk (‪Norsk (nynorsk)‬)
  * @author Eirik
  */
 $messages['nn'] = array(
-	'pnghandler-desc' => 'Endre storleiken på PNG-bilete med pngds',
+	'movhandler-desc' => 'Endre storleiken på PNG-bilete med ffmpeg',
 );
 
 /** Norwegian (bokmål)‬ (‪Norsk (bokmål)‬)
  * @author Jon Harald Søby
  */
 $messages['no'] = array(
-	'pnghandler-desc' => 'Endre størrelsen på PNG-bilder med pngds',
+	'movhandler-desc' => 'Endre størrelsen på PNG-bilder med ffmpeg',
 );
 
 /** Occitan (Occitan)
  * @author Cedric31
  */
 $messages['oc'] = array(
-	'pnghandler-desc' => 'Redimensionar las PNG gràcia a pngds',
+	'movhandler-desc' => 'Redimensionar las PNG gràcia a ffmpeg',
 );
 
 /** Polish (Polski)
  * @author Sp5uhe
  */
 $messages['pl'] = array(
-	'pnghandler-desc' => 'Zmiana rozmiaru obrazu w formacie PNG z użyciem „pngds”',
+	'movhandler-desc' => 'Zmiana rozmiaru obrazu w formacie PNG z użyciem „ffmpeg”',
 );
 
 /** Piedmontese (Piemontèis)
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'pnghandler-desc' => 'A redimension-a PNGs an dovrand pngds',
+	'movhandler-desc' => 'A redimension-a MOVs an dovrand ffmpeg',
 );
 
 /** Portuguese (Português)
  * @author Malafaya
  */
 $messages['pt'] = array(
-	'pnghandler-desc' => 'Redimensiona PNGs usando pngds',
+	'movhandler-desc' => 'Redimensiona MOVs usando ffmpeg',
 );
 
 /** Brazilian Portuguese (Português do Brasil)
  * @author Eduardo.mps
  */
 $messages['pt-br'] = array(
-	'pnghandler-desc' => 'Redimensiona PNGs usando pngds',
+	'movhandler-desc' => 'Redimensiona MOVs usando ffmpeg',
 );
 
 /** Romanian (Română)
  * @author Firilacroco
  */
 $messages['ro'] = array(
-	'pnghandler-desc' => 'Redimensionează fişierele PNG folosind pngds',
+	'movhandler-desc' => 'Redimensionează fişierele PNG folosind ffmpeg',
 );
 
 /** Tarandíne (Tarandíne)
  * @author Joetaras
  */
 $messages['roa-tara'] = array(
-	'pnghandler-desc' => 'Ridimenzione le PNG ausanne le pngds',
+	'movhandler-desc' => 'Ridimenzione le PNG ausanne le ffmpeg',
 );
 
 /** Russian (Русский)
  * @author Александр Сигачёв
  */
 $messages['ru'] = array(
-	'pnghandler-desc' => 'Изменяет размер PNG-файлов с помощью pngds',
+	'movhandler-desc' => 'Изменяет размер PNG-файлов с помощью ffmpeg',
 );
 
 /** Slovak (Slovenčina)
  * @author Helix84
  */
 $messages['sk'] = array(
-	'pnghandler-desc' => 'Zmeniť veľkosť obrázkov PNG pomocou pngds',
+	'movhandler-desc' => 'Zmeniť veľkosť obrázkov PNG pomocou ffmpeg',
 );
 
 /** Serbian Cyrillic ekavian (Српски (ћирилица))
  * @author Sasa Stefanovic
  */
 $messages['sr-ec'] = array(
-	'pnghandler-desc' => 'Промени величину ПНГ слика користећи pngds',
+	'movhandler-desc' => 'Промени величину ПНГ слика користећи ffmpeg',
 );
 
 /** Serbian Latin ekavian (Srpski (latinica))
  * @author Michaello
  */
 $messages['sr-el'] = array(
-	'pnghandler-desc' => 'Promeni veličinu PNG slika koristeći pngds',
+	'movhandler-desc' => 'Promeni veličinu PNG slika koristeći ffmpeg',
 );
 
 /** Seeltersk (Seeltersk)
  * @author Pyt
  */
 $messages['stq'] = array(
-	'pnghandler-desc' => 'Annerje ju Grööte fon PNGs mäd Hilfe von „pngds“',
+	'movhandler-desc' => 'Annerje ju Grööte fon MOVs mäd Hilfe von „ffmpeg“',
 );
 
 /** Swedish (Svenska)
  * @author M.M.S.
  */
 $messages['sv'] = array(
-	'pnghandler-desc' => 'Ändra storleken på PNG-bilder med pngds',
+	'movhandler-desc' => 'Ändra storleken på PNG-bilder med ffmpeg',
 );
 
 /** Telugu (తెలుగు)
  * @author Veeven
  */
 $messages['te'] = array(
-	'pnghandler-desc' => 'pngdsని ఉపయోగించి PNGల పరిమాణాన్ని మార్చండి',
+	'movhandler-desc' => 'ffmpegని ఉపయోగించి PNGల పరిమాణాన్ని మార్చండి',
 );
 
 /** Tagalog (Tagalog)
  * @author AnakngAraw
  */
 $messages['tl'] = array(
-	'pnghandler-desc' => "Muling bigyan ng sukat ang mga PNG sa pamamagitan ng paggamit ng ''pngds''",
+	'movhandler-desc' => "Muling bigyan ng sukat ang mga PNG sa pamamagitan ng paggamit ng ''ffmpeg''",
 );
 
 /** Turkish (Türkçe)
  * @author Vito Genovese
  */
 $messages['tr'] = array(
-	'pnghandler-desc' => "Pngds kullanarak PNG'lerin boyutunu düzenler",
+	'movhandler-desc' => "Pngds kullanarak PNG'lerin boyutunu düzenler",
 );
 
 /** Ukrainian (Українська)
  * @author Prima klasy4na
  */
 $messages['uk'] = array(
-	'pnghandler-desc' => 'Змінює розмір PNG-файлів за допомогою pngds',
+	'movhandler-desc' => 'Змінює розмір PNG-файлів за допомогою ffmpeg',
 );
 
 /** Vèneto (Vèneto)
  * @author Candalua
  */
 $messages['vec'] = array(
-	'pnghandler-desc' => 'Ridimensiona i PNG doparando pngds',
+	'movhandler-desc' => 'Ridimensiona i PNG doparando ffmpeg',
 );
 
 /** Vietnamese (Tiếng Việt)
  * @author Vinhtantran
  */
 $messages['vi'] = array(
-	'pnghandler-desc' => 'Thay đổi kích thước PNG bằng cách dùng pngds',
+	'movhandler-desc' => 'Thay đổi kích thước PNG bằng cách dùng ffmpeg',
 );
 
 /** Simplified Chinese (‪中文(简体)‬)
  * @author Gzdavidwong
  */
 $messages['zh-hans'] = array(
-	'pnghandler-desc' => '使用pngds调整PNG图像大小',
+	'movhandler-desc' => '使用ffmpeg调整PNG图像大小',
 );
 
 /** Traditional Chinese (‪中文(繁體)‬)
@@ -419,6 +419,6 @@ $messages['zh-hans'] = array(
  * @author Wrightbus
  */
 $messages['zh-hant'] = array(
-	'pnghandler-desc' => '使用pngds調整PNG圖片大小',
+	'movhandler-desc' => '使用ffmpeg調整PNG圖片大小',
 );
 
