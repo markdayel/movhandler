@@ -3,8 +3,10 @@
 // MediaHandler::getParamMap, MediaHandler::validateParam, MediaHandler::makeParamString
 // MediaHandler::parseParamString, MediaHandler::normaliseParams, MediaHandler::getImageSize
 
-class movhandler extends MediaHandler
+class movhandler extends ImageHandler
 {
+	function isEnabled() { return true; }
+	
 	function canRender( $file ) { return true; }
 	function mustRender( $file ) { return true; }
 	
@@ -34,32 +36,32 @@ class movhandler extends MediaHandler
 		}
 	}
 
-	function makeParamString( $params ) 
-	{
-		if ($params['width'] == 0) {
-			$params['width'] = 500;
-		}
-		
-	     if ( isset( $params['physicalWidth'] ) ) 
-			{
-                     $width = $params['physicalWidth'];
-             } 
-			elseif ( isset( $params['width'] ) ) 
-			{
-                     $width = $params['width'];
-             } else 
-			{
-                     throw new MWException( 'No width specified to '.__METHOD__ );
-             }
-             # Removed for ProofreadPage
-             #$width = intval( $width );
-			
-
-
-			 wfDebug( __METHOD__.": width px: {$width}\n" );
-
-             return "{$width}px";
-     }
+	// function makeParamString( $params ) 
+	// {
+	// 	if ($params['width'] == 0) {
+	// 		$params['width'] = 500;
+	// 	}
+	// 	
+	//      if ( isset( $params['physicalWidth'] ) ) 
+	// 		{
+	//                      $width = $params['physicalWidth'];
+	//              } 
+	// 		elseif ( isset( $params['width'] ) ) 
+	// 		{
+	//                      $width = $params['width'];
+	//              } else 
+	// 		{
+	//                      throw new MWException( 'No width specified to '.__METHOD__ );
+	//              }
+	//              # Removed for ProofreadPage
+	//              #$width = intval( $width );
+	// 		
+	// 
+	// 
+	// 		 wfDebug( __METHOD__.": width px: {$width}\n" );
+	// 
+	//              return "{$width}px";
+	//      }
 
 	function parseParamString( $str ) {
 	          $m = false;
@@ -135,15 +137,14 @@ class movhandler extends MediaHandler
 
 	function doTransform( $image, $dstPath, $dstUrl, $params, $flags = 0 ) 
 	{
-		
-		// if (file_exists($dstPath)) {
-		//     return;
-		// } 
+
 		
 		global $egffmpegPath, $egffmpegFallback, $egffmpegMinSize;
 			
 		if ($params['width'] == 0) {
-			$params['width'] = 500;
+			$gis = $image->getImageSize( $image, $image->getPath() );
+
+		        $params['width'] = $gis[0];
 		}
 			
 		wfDebug( __METHOD__.": params['width']: {$params['width']} params['height']: {$params['height']}\n" );
@@ -157,10 +158,21 @@ class movhandler extends MediaHandler
 		
 		$clientWidth = $params['width'];
 		$clientHeight = $params['height'];
-		//$srcWidth = $image->getWidth();
-		//$srcHeight = $image->getHeight();
+		
+		// return thumb if already exitsts
+		if (file_exists($dstPath)) {
+		    return new ThumbnailImage( $image, $dstUrl, $clientWidth, $clientHeight, $dstPath );
+		}
+		
+		
+		// $physicalWidth = $params['physicalWidth'];
+		// $physicalHeight = $params['physicalHeight'];
+		
+		wfDebug( __METHOD__.": params['physicalWidth']: {$params['physicalWidth']} params['physicalHeight']: {$params['physicalHeight']}\n" );
+		
+		
     	$gis = $image->getImageSize( $image, $image->getPath() );
-	    		
+	
         $srcWidth = $gis[0];
         $srcHeight = $gis[1];
 
@@ -224,4 +236,81 @@ class movhandler extends MediaHandler
 			return new ThumbnailImage( $image, $dstUrl, $clientWidth, $clientHeight, $dstPath );
 		}
 	}
+	// function getLongDesc( $image ) {
+	// 	global $wgLang;
+	// 	$gis = $image->getImageSize( $image, $image->getPath() );
+	// 
+	//         $srcWidth = $gis[0];
+	//         $srcHeight = $gis[1];
+	// 	return wfMsgExt( 'mov-long-desc', 'parseinline',
+	// 		$wgLang->formatNum( $srcWidth ),
+	// 		$wgLang->formatNum( $srcHeight ),
+	// 		$wgLang->formatSize( $image->getSize() ) );
+	// }
+	
+	//     function getLongDesc( $image ) {
+	//        	global $wgLang;
+	// 		$gis = $image->getImageSize( $image, $image->getPath() );
+	// 
+	// 	        $srcWidth = $gis[0];
+	// 	        $srcHeight = $gis[1];
+	// 
+	//         return wfMsgExt( 'show-big-image-thumb', 'parseinline',
+	// 					$wgLang->formatNum( $srcWidth ),
+	// 				$wgLang->formatNum( $srcHeight ),
+	// 				$wgLang->formatSize( $image->getSize() ),
+	// 			               $image->getMimeType() );
+	// 
+	//     }
+	// 
+	// function getShortDesc( $image ) {
+	//         global $wgLang;
+	//             $nbytes = '(' . wfMsgExt( 'nbytes', array( 'parsemag', 'escape' ),
+	//                     $wgLang->formatNum( $image->getSize() ) ) . ')';
+	//             return "$nbytes";
+	//     }
+
+	function getShortDesc( $image ) {
+		global $wgLang;
+		
+		$gis = $image->getImageSize( $image, $image->getPath() );
+
+	        $srcWidth = $gis[0];
+	        $srcHeight = $gis[1];
+		
+		$nbytes = wfMsgExt( 'nbytes', array( 'parsemag', 'escape' ),
+			$wgLang->formatNum( $image->getSize() ) );
+		$widthheight = wfMsgHtml( 'widthheight', $wgLang->formatNum( $srcWidth) ,$wgLang->formatNum( $srcHeight) );
+
+		return "$widthheight ($nbytes)";
+	}
+
+	function getLongDesc( $image ) {
+		global $wgLang;
+		$gis = $image->getImageSize( $image, $image->getPath() );
+
+	        $srcWidth = $gis[0];
+	        $srcHeight = $gis[1];
+		return wfMsgExt('file-info-size', 'parseinline',
+			$wgLang->formatNum( $srcWidth ),
+			$wgLang->formatNum( $srcHeight ),
+			$wgLang->formatSize( $image->getSize() ),
+			$image->getMimeType() );
+	}
+
+	function getDimensionsString( $image ) {
+		global $wgLang;
+		
+		$gis = $image->getImageSize( $image, $image->getPath() );
+
+	        $srcWidth = $gis[0];
+	        $srcHeight = $gis[1];
+		
+		$width = $wgLang->formatNum( $srcWidth );
+		$height = $wgLang->formatNum( $srcHeight );
+
+		return wfMsg( 'widthheight', $width, $height );
+
+	}
+
 }
