@@ -215,7 +215,7 @@ class movhandler extends ImageHandler
 		//wfDebug( __METHOD__.": shellret: {$shellret}\n" );
 	
 		// parse output
-		$result=preg_match('/, (\d+) tbr,/', $shellret, $matches );
+		$result=preg_match('/, (\d+) tbn,/', $shellret, $matches );
 				
 		$fps = $matches [1] ? $matches [1] : null;
 		
