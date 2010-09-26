@@ -120,18 +120,14 @@ class movhandler extends MediaHandler
 	
 		//wfDebug( __METHOD__.": shellret: {$shellret}\n" );
 	
-	
+
 		// parse output
-		$result=ereg('[0-9]?[0-9][0-9][0-9]x[0-9][0-9][0-9][0-9]?', $shellret, $dimensions );
+		$result=preg_match('/[0-9]?[0-9][0-9][0-9]x[0-9][0-9][0-9][0-9]?/', $shellret, $dimensions );
 	
 		$expandeddims = (explode ( 'x', $dimensions [0] ));
 		
 		$width = $expandeddims [0] ? $expandeddims [0] : null;
 		$height = $expandeddims [1] ? $expandeddims [1] : null;
-		
-		//wfDebug( __METHOD__.": result: {$result}\n" );
-		
-		//wfDebug( __METHOD__.": width : {$width}  width : {$height} \n" );
 		
 		return array ($width, $height );	
     }
@@ -139,6 +135,11 @@ class movhandler extends MediaHandler
 
 	function doTransform( $image, $dstPath, $dstUrl, $params, $flags = 0 ) 
 	{
+		
+		// if (file_exists($dstPath)) {
+		//     return;
+		// } 
+		
 		global $egffmpegPath, $egffmpegFallback, $egffmpegMinSize;
 			
 		if ($params['width'] == 0) {
@@ -219,9 +220,7 @@ class movhandler extends MediaHandler
 		} 
 		else 
 		{
-			// get the width and height using php's getimagesize (is there a way to get these from the mogrify command?)
- 			list($clientWidth, $clientHeight, $type, $attr) = getimagesize($dstPath);
-
+ 			//list($clientWidth, $clientHeight, $type, $attr) = getimagesize($dstPath);
 			return new ThumbnailImage( $image, $dstUrl, $clientWidth, $clientHeight, $dstPath );
 		}
 	}
