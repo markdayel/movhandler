@@ -184,10 +184,9 @@ class movhandler extends MediaHandler
 		} 
 		else 
 		{
-			// get the width and height using imagemagick identify (is there a way to get these from the mogrify command?)
-			$clientWidth=wfShellExec( "identify -format %w ".wfEscapeShellArg( $dstPath ), $retval );
-			$clientHeight=wfShellExec( "identify -format %h ".wfEscapeShellArg( $dstPath ), $retval );
- 
+			// get the width and height using php's getimagesize (is there a way to get these from the mogrify command?)
+ 			list($clientWidth, $clientHeight, $type, $attr) = getimagesize($dstPath);
+
 			return new ThumbnailImage( $image, $dstUrl, $clientWidth, $clientHeight, $dstPath );
 		}
 	}
