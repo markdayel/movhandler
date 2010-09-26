@@ -12,6 +12,8 @@ $messages = array();
  */
 $messages['en'] = array(
 	'movhandler-desc' => 'Resize MOVs using ffmpeg',
+	'mov-long-video'       => '($1 × $2 pixels, file size: $3, Duration (h:m:s): $4, MIME type: $5)',
+	'mov-short-video'      => '$1 video file, $2',
 );
 
 /** Message documentation (Message documentation)

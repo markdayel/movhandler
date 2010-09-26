@@ -8,27 +8,14 @@ $wgExtensionCredits['media'][] = array(
 	'path' => __FILE__,
 	'name' => 'movhandler',
 	'author' => 'Mark J Dayel', 
-	'url' => 'http://www.mediawiki.org/wiki/Extension:movhandler', 
+	'url' => 'http://projects.dayel.com/projects/movhandler', 
 	'description' => 'show thumbnails for quicktime mov files',
 	'descriptionmsg' => 'movhandler-desc',
 );
 
 /*
- * Path to the ffmpeg executable. Download the source from 
- * <http://svn.wikimedia.org/svnroot/mediawiki/trunk/ffmpeg> or binaries from
- * <http://toolserver.org/~bryan/ffmpeg/>
+ *  Requires ffmpeg and imagemagick to be installed
  */
-$egffmpegPath = '';
-/*
- * If true tries to resize using the default media handler.
- * Handy as ffmpeg not support upscaling or palette images
- */
-$egffmpegFallback = true;
-/*
- * Minimum size in pixels for an image to be handled using PNGHandler. 
- * Smaller files will be handled using the default media handler.
- */
-$egffmpegMinSize = 2000000;
 
 $wgMediaHandlers['video/quicktime'] = 'movhandler';
 $wgMediaHandlers['video/mp4'] = 'movhandler';

@@ -18,67 +18,13 @@ class movhandler extends ImageHandler
 		return 'mov';
 	}
 	
-
-	 function getParamMap() {                       	
-	         return array( 'img_width' => 'width' );	
-	 }                                              
-
-	 function validateParam( $name, $value ) 
-	 {
-		if ( in_array( $name, array( 'width', 'height' ) ) ) {
-		        if ( $value <= 0 ) {
-		                return false;
-		        } else {
-		                return true;
-		        }
-		} else {
-		        return false;
-		}
-	}
-
-	// function makeParamString( $params ) 
-	// {
-	// 	if ($params['width'] == 0) {
-	// 		$params['width'] = 500;
-	// 	}
-	// 	
-	//      if ( isset( $params['physicalWidth'] ) ) 
-	// 		{
-	//                      $width = $params['physicalWidth'];
-	//              } 
-	// 		elseif ( isset( $params['width'] ) ) 
-	// 		{
-	//                      $width = $params['width'];
-	//              } else 
-	// 		{
-	//                      throw new MWException( 'No width specified to '.__METHOD__ );
-	//              }
-	//              # Removed for ProofreadPage
-	//              #$width = intval( $width );
-	// 		
-	// 
-	// 
-	// 		 wfDebug( __METHOD__.": width px: {$width}\n" );
-	// 
-	//              return "{$width}px";
-	//      }
-
-	function parseParamString( $str ) {
-	          $m = false;
-            if ( preg_match( '/^(\d+)px$/', $str, $m ) ) {
-                    return array( 'width' => $m[1] );
-            } else {
-                    return false;
-            }
-    }
-
 	function normaliseParams( $image, &$params ) {
 	        $mimeType = $image->getMimeType();
-
+	
 	        if ( !isset( $params['width'] ) ) {
 	                return false;
 	        }
-
+	
 	    	$gis = $image->getImageSize( $image, $image->getPath() );
 		    		
 	        $srcWidth = $gis[0];
@@ -115,14 +61,10 @@ class movhandler extends ImageHandler
 	function getImageSize( $image, $path ) 
 	{
 		// ffmpeg returns the image size if you give no arguments
-
-	 
-	
-		$shellret = wfShellExec( "{$egffmpegPath}ffmpeg -i ". wfEscapeShellArg( $image->getPath() ) . " 2>&1", $retval );
+		$shellret = wfShellExec( "ffmpeg -i ". wfEscapeShellArg( $image->getPath() ) . " 2>&1", $retval );
 	
 		//wfDebug( __METHOD__.": shellret: {$shellret}\n" );
 	
-
 		// parse output
 		$result=preg_match('/[0-9]?[0-9][0-9][0-9]x[0-9][0-9][0-9][0-9]?/', $shellret, $dimensions );
 	
@@ -137,9 +79,6 @@ class movhandler extends ImageHandler
 
 	function doTransform( $image, $dstPath, $dstUrl, $params, $flags = 0 ) 
 	{
-
-		
-		global $egffmpegPath, $egffmpegFallback, $egffmpegMinSize;
 			
 		if ($params['width'] == 0) {
 			$gis = $image->getImageSize( $image, $image->getPath() );
@@ -165,12 +104,6 @@ class movhandler extends ImageHandler
 		}
 		
 		
-		// $physicalWidth = $params['physicalWidth'];
-		// $physicalHeight = $params['physicalHeight'];
-		
-		wfDebug( __METHOD__.": params['physicalWidth']: {$params['physicalWidth']} params['physicalHeight']: {$params['physicalHeight']}\n" );
-		
-		
     	$gis = $image->getImageSize( $image, $image->getPath() );
 	
         $srcWidth = $gis[0];
@@ -179,15 +112,9 @@ class movhandler extends ImageHandler
 		$srcPath = $image->getPath();
 		$retval = 0;
 		
-
-		//$outWidth=$params['physicalWidth'];
-		//$outHeight=$params['physicalHeight'];
 				
 		$outWidth=$clientWidth;
 		$outHeight=$clientHeight;
-		
-		// if (!is_null($egffmpegMinSize) && (($srcWidth * $srcHeight) < $egffmpegMinSize))
-		// 	return parent::doTransform($image, $dstPath, $dstUrl, $params, $flags);
 
 		if ( $outWidth == $srcWidth && $outWidth == $srcHeight ) {
 			# normaliseParams (or the user) wants us to return the unscaled image
@@ -200,7 +127,7 @@ class movhandler extends ImageHandler
 
 		wfDebug( __METHOD__.": creating {$outWidth}x{$outHeight} thumbnail at $dstPath\n" );
 
-		$cmd1 = "{$egffmpegPath}ffmpeg ".
+		$cmd1 = "ffmpeg ".
 			"-y -itsoffset 0.1 ".
 			"-i ". wfEscapeShellArg( $srcPath )." ".
 			"-ss 1 -vframes 1 -vcodec png -an ".
@@ -219,9 +146,6 @@ class movhandler extends ImageHandler
 		}
 		wfProfileOut( 'convert' );
 
-		// if ($err !== 0 && $egffmpegFallback)
-		// 	return parent::doTransform($image, $dstPath, $dstUrl, $params, $flags);
-
 		$removed = $this->removeBadFile( $dstPath, $retval );
 
 		if ( $retval != 0 || $removed ) {
@@ -232,43 +156,25 @@ class movhandler extends ImageHandler
 		} 
 		else 
 		{
- 			//list($clientWidth, $clientHeight, $type, $attr) = getimagesize($dstPath);
 			return new ThumbnailImage( $image, $dstUrl, $clientWidth, $clientHeight, $dstPath );
 		}
 	}
-	// function getLongDesc( $image ) {
-	// 	global $wgLang;
-	// 	$gis = $image->getImageSize( $image, $image->getPath() );
-	// 
-	//         $srcWidth = $gis[0];
-	//         $srcHeight = $gis[1];
-	// 	return wfMsgExt( 'mov-long-desc', 'parseinline',
-	// 		$wgLang->formatNum( $srcWidth ),
-	// 		$wgLang->formatNum( $srcHeight ),
-	// 		$wgLang->formatSize( $image->getSize() ) );
-	// }
 	
-	//     function getLongDesc( $image ) {
-	//        	global $wgLang;
-	// 		$gis = $image->getImageSize( $image, $image->getPath() );
-	// 
-	// 	        $srcWidth = $gis[0];
-	// 	        $srcHeight = $gis[1];
-	// 
-	//         return wfMsgExt( 'show-big-image-thumb', 'parseinline',
-	// 					$wgLang->formatNum( $srcWidth ),
-	// 				$wgLang->formatNum( $srcHeight ),
-	// 				$wgLang->formatSize( $image->getSize() ),
-	// 			               $image->getMimeType() );
-	// 
-	//     }
-	// 
-	// function getShortDesc( $image ) {
-	//         global $wgLang;
-	//             $nbytes = '(' . wfMsgExt( 'nbytes', array( 'parsemag', 'escape' ),
-	//                     $wgLang->formatNum( $image->getSize() ) ) . ')';
-	//             return "$nbytes";
-	//     }
+	function getLength( $image ) 
+	{	
+		$shellret = wfShellExec( "ffmpeg -i ". wfEscapeShellArg( $image->getPath() ) . " 2>&1", $retval );
+	
+		//wfDebug( __METHOD__.": shellret: {$shellret}\n" );
+	
+		// parse output
+		$result=preg_match('/Duration: (.*?),/', $shellret, $matches );
+				
+		$duration = $matches [1] ? $matches [1] : null;
+		
+		wfDebug( __METHOD__.": duration: {$duration}\n" );
+		
+		return $duration;
+	}
 
 	function getShortDesc( $image ) {
 		global $wgLang;
@@ -291,10 +197,11 @@ class movhandler extends ImageHandler
 
 	        $srcWidth = $gis[0];
 	        $srcHeight = $gis[1];
-		return wfMsgExt('file-info-size', 'parseinline',
+		return wfMsgExt('mov-long-video', 'parseinline',
 			$wgLang->formatNum( $srcWidth ),
 			$wgLang->formatNum( $srcHeight ),
 			$wgLang->formatSize( $image->getSize() ),
+			$image->getLength( $image ),
 			$image->getMimeType() );
 	}
 
