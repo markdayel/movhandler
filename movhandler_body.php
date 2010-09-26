@@ -196,7 +196,7 @@ class movhandler extends ImageHandler
 	{	
 		$shellret = wfShellExec( "ffmpeg -i ". wfEscapeShellArg( $image->getPath() ) . " 2>&1", $retval );
 	
-		wfDebug( __METHOD__.": shellret: {$shellret}\n" );
+		//wfDebug( __METHOD__.": shellret: {$shellret}\n" );
 	
 		// parse output
 		$result=preg_match('/bitrate: (.*?) kb\/s/', $shellret, $matches );
@@ -206,6 +206,22 @@ class movhandler extends ImageHandler
 		wfDebug( __METHOD__.": bitrate: {$bitrate}\n" );
 		
 		return $bitrate;
+	}
+	
+	function getFps( $image ) 
+	{	
+		$shellret = wfShellExec( "ffmpeg -i ". wfEscapeShellArg( $image->getPath() ) . " 2>&1", $retval );
+	
+		//wfDebug( __METHOD__.": shellret: {$shellret}\n" );
+	
+		// parse output
+		$result=preg_match('/, (\d+) tbr,/', $shellret, $matches );
+				
+		$fps = $matches [1] ? $matches [1] : null;
+		
+		wfDebug( __METHOD__.": fps: {$fps}\n" );
+		
+		return $fps;
 	}
 
 	function getShortDesc( $image ) {
@@ -233,9 +249,10 @@ class movhandler extends ImageHandler
 			$wgLang->formatNum( $srcWidth ),
 			$wgLang->formatNum( $srcHeight ),
 			$wgLang->formatSize( $image->getSize() ),
-			$this->getEncoder( $image ),
-			$this->getBitrate( $image ),
 			$image->getLength( $image ),
+			$this->getFps( $image ),
+			$this->getBitrate( $image ),
+			$this->getEncoder( $image ),
 			$image->getMimeType() );
 	}
 
