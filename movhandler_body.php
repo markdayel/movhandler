@@ -36,17 +36,28 @@ class movhandler extends MediaHandler
 
 	function makeParamString( $params ) 
 	{
-	     if ( isset( $params['physicalWidth'] ) ) {
+		if ($params['width'] == 0) {
+			$params['width'] = 500;
+		}
+		
+	     if ( isset( $params['physicalWidth'] ) ) 
+			{
                      $width = $params['physicalWidth'];
-             } elseif ( isset( $params['width'] ) ) {
+             } 
+			elseif ( isset( $params['width'] ) ) 
+			{
                      $width = $params['width'];
-             } else {
+             } else 
+			{
                      throw new MWException( 'No width specified to '.__METHOD__ );
              }
-			 $width = 300;
- 			 $height = 300;
              # Removed for ProofreadPage
              #$width = intval( $width );
+			
+
+
+			 wfDebug( __METHOD__.": width px: {$width}\n" );
+
              return "{$width}px";
      }
 
@@ -66,37 +77,63 @@ class movhandler extends MediaHandler
 	                return false;
 	        }
 
-	        if ( !isset( $params['page'] ) ) {
-	                $params['page'] = 1;
-	        } else  {
-	                if ( $params['page'] > $image->pageCount() ) {
-	                        $params['page'] = $image->pageCount();
-	                }
-
-	                if ( $params['page'] < 1 ) {
-	                        $params['page'] = 1;
-	                }
-	        }
-
-	        $srcWidth = $image->getWidth( $params['page'] );
-	        $srcHeight = $image->getHeight( $params['page'] );
+	    	$gis = $image->getImageSize( $image, $image->getPath() );
+		    		
+	        $srcWidth = $gis[0];
+	        $srcHeight = $gis[1];
+				
+			//wfDebug( __METHOD__.": srcWidth: {$srcWidth} srcHeight: {$srcHeight}\n" );
+			
 	        if ( isset( $params['height'] ) && $params['height'] != -1 ) {
 	                if ( $params['width'] * $srcHeight > $params['height'] * $srcWidth ) {
 	                        $params['width'] = wfFitBoxWidth( $srcWidth, $srcHeight, $params['height'] );
 	                }
 	        }
+	
 	        $params['height'] = File::scaleHeight( $srcWidth, $srcHeight, $params['width'] );
 	        // if ( !$this->validateThumbParams( $params['width'], $params['height'], $srcWidth, $srcHeight, $mimeType ) ) {
 	        //         return false;
 	        // }
+	
+	
+			//wfDebug( __METHOD__.": srcWidth: {$srcWidth} srcHeight: {$srcHeight}\n" );
+			
 	        return true;
 	}
 	
-	function getImageSize( $image, $path ) {
-	    wfSuppressWarnings();
-	    $gis = getimagesize( $path );
-	    wfRestoreWarnings();
-	    return $gis;
+	function getPageDimensions( $image, $page ) {
+    	$gis = $this->getImageSize( $image, $image->getPath() );
+	    return array(
+	            'width' => $gis[0],
+	            'height' => $gis[1]
+	    );
+	}
+	
+	
+	function getImageSize( $image, $path ) 
+	{
+		// ffmpeg returns the image size if you give no arguments
+
+	 
+	
+		$shellret = wfShellExec( "{$egffmpegPath}ffmpeg -i ". wfEscapeShellArg( $image->getPath() ) . " 2>&1", $retval );
+	
+		//wfDebug( __METHOD__.": shellret: {$shellret}\n" );
+	
+	
+		// parse output
+		$result=ereg('[0-9]?[0-9][0-9][0-9]x[0-9][0-9][0-9][0-9]?', $shellret, $dimensions );
+	
+		$expandeddims = (explode ( 'x', $dimensions [0] ));
+		
+		$width = $expandeddims [0] ? $expandeddims [0] : null;
+		$height = $expandeddims [1] ? $expandeddims [1] : null;
+		
+		//wfDebug( __METHOD__.": result: {$result}\n" );
+		
+		//wfDebug( __METHOD__.": width : {$width}  width : {$height} \n" );
+		
+		return array ($width, $height );	
     }
 	
 
@@ -104,16 +141,28 @@ class movhandler extends MediaHandler
 	{
 		global $egffmpegPath, $egffmpegFallback, $egffmpegMinSize;
 			
+		if ($params['width'] == 0) {
+			$params['width'] = 500;
+		}
+			
+		wfDebug( __METHOD__.": params['width']: {$params['width']} params['height']: {$params['height']}\n" );
+		
+			
 		if ( !$this->normaliseParams( $image, $params ) ) {
 			return new TransformParameterError( $params );
 		}
 		
-		$clientWidth = 300;//$params['width'];
-		$clientHeight = 300;//$params['height'];
+		wfDebug( __METHOD__.": params['width']: {$params['width']} params['height']: {$params['height']}\n" );
+		
+		$clientWidth = $params['width'];
+		$clientHeight = $params['height'];
 		//$srcWidth = $image->getWidth();
 		//$srcHeight = $image->getHeight();
-		$srcWidth = 800;
-		$srcHeight = 600;
+    	$gis = $image->getImageSize( $image, $image->getPath() );
+	    		
+        $srcWidth = $gis[0];
+        $srcHeight = $gis[1];
+
 		$srcPath = $image->getPath();
 		$retval = 0;
 		
@@ -121,8 +170,8 @@ class movhandler extends MediaHandler
 		//$outWidth=$params['physicalWidth'];
 		//$outHeight=$params['physicalHeight'];
 				
-		$outWidth=300;
-		$outHeight=300;
+		$outWidth=$clientWidth;
+		$outHeight=$clientHeight;
 		
 		// if (!is_null($egffmpegMinSize) && (($srcWidth * $srcHeight) < $egffmpegMinSize))
 		// 	return parent::doTransform($image, $dstPath, $dstUrl, $params, $flags);
@@ -137,20 +186,6 @@ class movhandler extends MediaHandler
 		wfMkdirParents( dirname( $dstPath ) );
 
 		wfDebug( __METHOD__.": creating {$outWidth}x{$outHeight} thumbnail at $dstPath\n" );
-
-		// // this command tries to resize directly in ffmpeg
-		// $cmd = "{$egffmpegPath}ffmpeg ".
-		// 	"-y -itsoffset 1 ".
-		// 	"-i ". wfEscapeShellArg( $srcPath )." ".
-		// 	"-s {$outWidth}x{$outHeight} ".
-		// 	"-ss 1 -vframes 1 -vcodec png -an ".
-		// 	wfEscapeShellArg( $dstPath );
-
-		// $cmd1 = "{$egffmpegPath}ffmpeg ".
-		// 	"-y -itsoffset 0 ".
-		// 	"-i ". wfEscapeShellArg( $srcPath )." ".
-		// 	"-ss 1 -vframes 1 -vcodec png -an ".
-		// 	wfEscapeShellArg( $dstPath );
 
 		$cmd1 = "{$egffmpegPath}ffmpeg ".
 			"-y -itsoffset 0.1 ".
