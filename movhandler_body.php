@@ -176,6 +176,38 @@ class movhandler extends ImageHandler
 		return $duration;
 	}
 
+	function getEncoder( $image ) 
+	{	
+		$shellret = wfShellExec( "ffmpeg -i ". wfEscapeShellArg( $image->getPath() ) . " 2>&1", $retval );
+	
+		//wfDebug( __METHOD__.": shellret: {$shellret}\n" );
+	
+		// parse output
+		$result=preg_match('/Video: (.*?),/', $shellret, $matches );
+				
+		$encoder = $matches [1] ? $matches [1] : null;
+		
+		wfDebug( __METHOD__.": encoder: {$encoder}\n" );
+		
+		return $encoder;
+	}
+	
+	function getBitrate( $image ) 
+	{	
+		$shellret = wfShellExec( "ffmpeg -i ". wfEscapeShellArg( $image->getPath() ) . " 2>&1", $retval );
+	
+		wfDebug( __METHOD__.": shellret: {$shellret}\n" );
+	
+		// parse output
+		$result=preg_match('/bitrate: (.*?) kb\/s/', $shellret, $matches );
+				
+		$bitrate = $matches [1] ? $matches [1] : null;
+		
+		wfDebug( __METHOD__.": bitrate: {$bitrate}\n" );
+		
+		return $bitrate;
+	}
+
 	function getShortDesc( $image ) {
 		global $wgLang;
 		
@@ -201,6 +233,8 @@ class movhandler extends ImageHandler
 			$wgLang->formatNum( $srcWidth ),
 			$wgLang->formatNum( $srcHeight ),
 			$wgLang->formatSize( $image->getSize() ),
+			$this->getEncoder( $image ),
+			$this->getBitrate( $image ),
 			$image->getLength( $image ),
 			$image->getMimeType() );
 	}

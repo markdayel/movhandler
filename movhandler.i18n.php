@@ -12,7 +12,7 @@ $messages = array();
  */
 $messages['en'] = array(
 	'movhandler-desc' => 'Resize MOVs using ffmpeg',
-	'mov-long-video'       => '($1 × $2 pixels, file size: $3, Duration (h:m:s): $4, MIME type: $5)',
+	'mov-long-video'       => '($1 × $2 pixels, file size: $3, encoder: $4, bitrate: $5 kb/s, duration: $6, MIME type: $7)',
 	'mov-short-video'      => '$1 video file, $2',
 );
 
