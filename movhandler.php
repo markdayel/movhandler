@@ -32,5 +32,9 @@ $egffmpegMinSize = 2000000;
 
 $wgMediaHandlers['video/quicktime'] = 'movhandler';
 $wgMediaHandlers['video/mp4'] = 'movhandler';
+$wgMediaHandlers['video/x-ms-asf'] = 'movhandler';
+$wgMediaHandlers['video/x-msvideo'] = 'movhandler';
+$wgMediaHandlers['video/x-flv'] = 'movhandler';
+$wgMediaHandlers['video/mpeg'] = 'movhandler';
+$wgMediaHandlers['video/x-ms-wmv'] = 'movhandler';
 $wgMediaHandlers['application/quicktime'] = 'movhandler';
-
