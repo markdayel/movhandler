@@ -132,9 +132,9 @@ class movhandler extends ImageHandler
 		wfDebug( __METHOD__.": creating {$outWidth}x{$outHeight} thumbnail at $dstPath\n" );
 
 		$cmd1 = "ffmpeg ".
-			"-y -itsoffset 0.1 ".
+			"-y  ".
 			"-i ". wfEscapeShellArg( $srcPath )." ".
-			"-ss 1 -vframes 1 -vcodec png -an ".
+			"-ss 0.5 -vframes 1 -vcodec png -an ".
 			wfEscapeShellArg( $dstPath );
 
 		$cmd2 = "/usr/bin/mogrify -quality 2 -resize {$outWidth}x{$outHeight} ". wfEscapeShellArg( $dstPath );
