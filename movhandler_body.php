@@ -98,9 +98,13 @@ class movhandler extends ImageHandler
 		$clientWidth = $params['width'];
 		$clientHeight = $params['height'];
 		
-		// return thumb if already exitsts
-		if (file_exists($dstPath)) {
+		// return thumb if already exists (and is valid image of correct size)
+		if (file_exists($dstPath) ) {
+			// list($width, $height, $type, $attr) = getimagesize($dstPath);
+			// if (($width == $clientWidth) && ($height == $clientHeight))
+			// {
 		    return new ThumbnailImage( $image, $dstUrl, $clientWidth, $clientHeight, $dstPath );
+			// }
 		}
 		
 		
@@ -116,11 +120,11 @@ class movhandler extends ImageHandler
 		$outWidth=$clientWidth;
 		$outHeight=$clientHeight;
 
-		if ( $outWidth == $srcWidth && $outWidth == $srcHeight ) {
-			# normaliseParams (or the user) wants us to return the unscaled image
-			wfDebug( __METHOD__.": returning unscaled image\n" );
-			return new ThumbnailImage( $image, $image->getURL(), $clientWidth, $clientHeight, $srcPath );
-		}
+		// if ( $outWidth == $srcWidth && $outWidth == $srcHeight ) {
+		// 	# normaliseParams (or the user) wants us to return the unscaled image
+		// 	wfDebug( __METHOD__.": returning unscaled image\n" );
+		// 	return new ThumbnailImage( $image, $image->getURL(), $clientWidth, $clientHeight, $srcPath );
+		// }
 
 
 		wfMkdirParents( dirname( $dstPath ) );
