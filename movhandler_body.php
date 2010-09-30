@@ -60,9 +60,28 @@ class movhandler extends ImageHandler
 	
 	function getImageSize( $image, $path ) 
 	{
+		
+//		$varinfo = var_export($image, true);
+//		wfDebug( __METHOD__.": image: {$varinfo}\n" );
+		
+//		$varinfo = var_export($path, true);
+//		wfDebug( __METHOD__.": path: {$varinfo}\n" );
+		
+		// kludge to deal with path being set in different variables coming from api vs normal calls:
+		if (isset($image->path))
+		{
+			// normal call has $image->path set but $path not set
+			$mypath=$image->path;
+		}
+		else
+		{
+			// api has $path set but $image->path not set
+			$mypath=$path;
+		}
+		
 		// ffmpeg returns the image size if you give no arguments
-		$shellret = wfShellExec( "ffmpeg -i ". wfEscapeShellArg( $image->getPath() ) . " 2>&1", $retval );
-	
+		$shellret = wfShellExec( "ffmpeg -i ". wfEscapeShellArg( $mypath ) . " 2>&1", $retval );
+
 		//wfDebug( __METHOD__.": shellret: {$shellret}\n" );
 	
 		// parse output
