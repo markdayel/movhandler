@@ -104,6 +104,11 @@ class movhandler extends ImageHandler
 
 		        $params['width'] = $gis[0];
 		}
+		if (!array_key_exists('height',$params) || $params['height'] == 0) {
+			$gis = $image->getImageSize( $image, $image->getPath() );
+
+		        $params['height'] = $gis[1];
+		}
 			
 		wfDebug( __METHOD__.": params['width']: {$params['width']} params['height']: {$params['height']}\n" );
 		
@@ -240,7 +245,7 @@ class movhandler extends ImageHandler
 		// parse output
 		$result=preg_match('/, (\d+) tbn,/', $shellret, $matches );
 				
-		$fps = $matches [1] ? $matches [1] : null;
+		$fps = array_key_exists(1, $matches) && $matches [1] ? $matches [1] : null;
 		
 		wfDebug( __METHOD__.": fps: {$fps}\n" );
 		
